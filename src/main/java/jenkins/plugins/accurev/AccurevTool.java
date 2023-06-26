@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
@@ -48,10 +49,10 @@ public class AccurevTool extends ToolInstallation
 
   private static AccurevTool[] getInstallations(DescriptorImpl descriptor) {
     AccurevTool[] installations;
-    try {
-      installations = descriptor.getInstallations();
-    } catch (NullPointerException e) {
+    if (Objects.isNull(descriptor)) {
       installations = new AccurevTool[0];
+    } else {
+      installations = descriptor.getInstallations();
     }
     return installations;
   }
